@@ -1,0 +1,19 @@
+# `lofi.co` but Open Source
+
+## FAQ
+
+### Why ?
+
+I love the design of `lofi.co` and I want to keep it alive even after it shuts down.
+
+### What's not included ?
+
+- LofiAI
+
+...and maybe even more things but I don't know yet.
+
+### What about assets ?
+
+Since `lofi.co` will shut down, their assets at `https://lofico.nyc3.cdn.digitaloceanspaces.com` will probably also shut down - not sure about that though.
+
+To prevent losing any of those assets, I've dumped and mirrored them at `https://lofi-co-assets.vexcited.com`.

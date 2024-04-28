@@ -20,7 +20,7 @@ export { default as vanThumb } from "./van-set.png";
 
 // Ocean Tales
 export { default as oceanPreview } from "./ocean-in.png";
-export { default as oceanOutPreview } from "./o9cean-out.png";
+export { default as oceanOutPreview } from "./ocean-out.png";
 export { default as oceanThumb } from "./ocean-set.png";
 
 // Chill Vibes

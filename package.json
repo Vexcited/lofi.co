@@ -1,0 +1,28 @@
+{
+  "name": "lofi.co",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint . --ext ts,tsx"
+  },
+  "dependencies": {
+    "@fontsource/roboto": "^5.0.13",
+    "@unocss/reset": "^0.59.4",
+    "clsx": "^2.1.1",
+    "solid-js": "^1.8.17"
+  },
+  "devDependencies": {
+    "@iconify-json/mage": "^1.1.0",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "typescript": "^5.2.2",
+    "unocss": "^0.59.4",
+    "unplugin-icons": "^0.18.5",
+    "vite": "^5.2.0",
+    "vite-plugin-solid": "^2.10.2"
+  }
+}

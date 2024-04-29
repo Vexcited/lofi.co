@@ -7,6 +7,18 @@ import SettingsIcon from "../assets/icons/Settings";
 import { currentSceneID, night, pixelated, setNight, setPixelated } from "../stores/set";
 import { scenes } from "../assets/data/sets.data";
 import { hasSupportFor } from "../utils/set";
+import VolumeIcon from "../assets/icons/Volume";
+import VolumeMuteIcon from "../assets/icons/VolumeMute";
+import MixerIcon from "../assets/icons/Mixer";
+import TemplatesIcon from "../assets/icons/Templates";
+import ScenesIcon from "../assets/icons/Scenes";
+import ToolsIcon from "../assets/icons/Tools";
+import PipIcon from "../assets/icons/Pip";
+import FullscreenIcon from "../assets/icons/Fullscreen";
+
+const Divider = () => (
+  <div class="bg-[#fff2] rounded-[2px] h-[1px] my-[20px] w-[20px] rotate-90" />
+);
 
 const LateralMenu: Component = () => {
   const currentScene = () => scenes[currentSceneID()];
@@ -14,7 +26,7 @@ const LateralMenu: Component = () => {
   const supportForPixel = () => hasSupportFor(currentScene(), "pixel");
 
   return (
-    <div class="z-20 fixed bottom-[22px] inset-x-[17px] bg-bgd-100 rounded-[10px] h-[52px] border border-white/20 backdrop-blur-[30px] flex justify-center items-center px-4">
+    <div class="z-20 fixed bottom-[22px] inset-x-[17px] bg-bgd-100 rounded-[10px] h-[52px] border border-white/20 backdrop-blur-[30px] flex justify-between items-center px-4">
       {/* <p class="mr-auto">03:23 PM</p> */}
 
       <Show when={supportForNight()}>
@@ -37,13 +49,23 @@ const LateralMenu: Component = () => {
         />
       </Show>
 
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-4">
         <SkipPreviousIcon />
         <PlayIcon />
         <SkipNextIcon />
+        <VolumeIcon />
+        <VolumeMuteIcon />
+        <Divider />
+        <MixerIcon />
+        <TemplatesIcon />
+        <ScenesIcon />
+        <ToolsIcon />
+        <Divider />
+        <PipIcon />
+        <FullscreenIcon />
       </div>
 
-      <div class="ml-auto">
+      <div>
         <SettingsIcon />
       </div>
     </div>

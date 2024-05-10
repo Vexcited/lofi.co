@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/roboto": "^5.0.13",
+    "@kobalte/core": "^0.12.6",
     "@unocss/reset": "^0.59.4",
     "clsx": "^2.1.1",
     "solid-js": "^1.8.17"

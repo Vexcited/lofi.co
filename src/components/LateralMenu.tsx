@@ -1,4 +1,4 @@
-import { type Component, Show } from "solid-js";
+import { type Component, Show, type VoidComponent, type JSX } from "solid-js";
 
 import SkipPreviousIcon from "../assets/icons/SkipPrevious";
 import SkipNextIcon from "../assets/icons/SkipNext";
@@ -15,6 +15,9 @@ import ScenesIcon from "../assets/icons/Scenes";
 import ToolsIcon from "../assets/icons/Tools";
 import PipIcon from "../assets/icons/Pip";
 import FullscreenIcon from "../assets/icons/Fullscreen";
+import player from "../stores/player";
+import PauseIcon from "../assets/icons/Pause";
+import { AudioState } from "@solid-primitives/audio";
 
 const Divider = () => (
   <div class="bg-[#fff2] rounded-[2px] h-[1px] my-[20px] w-[20px] rotate-90" />
@@ -24,6 +27,19 @@ const LateralMenu: Component = () => {
   const currentScene = () => scenes[currentSceneID()];
   const supportForNight = () => hasSupportFor(currentScene(), "night");
   const supportForPixel = () => hasSupportFor(currentScene(), "pixel");
+
+  const Button: VoidComponent<{
+    icon: JSX.Element,
+    onClick: () => void
+  }> = (props) => (
+    <button
+      type="button"
+      class="p-2 hover:(bg-[#fff]/20 scale-110) rounded-lg transition"
+      onClick={() => props.onClick()}
+    >
+      {props.icon}
+    </button>
+  )
 
   return (
     <div class="z-20 fixed bottom-[22px] inset-x-[17px] bg-bgd-100 rounded-[10px] h-[52px] border border-white/20 backdrop-blur-[30px] flex justify-between items-center px-4">
@@ -49,20 +65,58 @@ const LateralMenu: Component = () => {
         />
       </Show>
 
-      <div class="flex items-center gap-4">
-        <SkipPreviousIcon />
-        <PlayIcon />
-        <SkipNextIcon />
-        <VolumeIcon />
-        <VolumeMuteIcon />
+      <div class="flex items-center gap-1.5">
+        <Button
+          icon={<SkipPreviousIcon />}
+          onClick={() => player.previousTrack()}
+        />
+
+        <Button
+          icon={player.audio.state === AudioState.PLAYING ? <PauseIcon /> : <PlayIcon />}
+          onClick={() => player.audio.state === AudioState.PLAYING ? player.controls.pause() : player.controls.play()}
+        />
+
+        <Button
+          icon={<SkipNextIcon />}
+          onClick={() => player.nextTrack()}
+        />
+
+        <Button
+          icon={<VolumeIcon />}
+          onClick={() => void 0}
+        />
+        <Button
+          icon={<VolumeMuteIcon />}
+          onClick={() => void 0}
+        />
+        
         <Divider />
-        <MixerIcon />
-        <TemplatesIcon />
-        <ScenesIcon />
-        <ToolsIcon />
+
+        <Button
+          icon={<MixerIcon />}
+          onClick={() => void 0}
+        />
+        <Button
+          icon={<TemplatesIcon />}
+          onClick={() => void 0}
+        />
+        <Button
+          icon={<ScenesIcon />}
+          onClick={() => void 0}
+        />
+        <Button
+          icon={<ToolsIcon />}
+          onClick={() => void 0}
+        />
         <Divider />
-        <PipIcon />
-        <FullscreenIcon />
+        <Button
+          icon={<PipIcon />}
+          onClick={() => void 0}
+        />
+        <Button
+          icon={<FullscreenIcon />}
+          onClick={() => void 0}
+        />
       </div>
 
       <div>

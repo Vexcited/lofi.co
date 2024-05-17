@@ -3,6 +3,7 @@ import LateralMenu from "../components/LateralMenu";
 import ActiveScene from "../components/ActiveScene";
 import AudioPlayer from "../components/AudioPlayer";
 import SceneSelector from "../components/SceneSelector";
+import EffectPlayer from "../components/EffectPlayer";
 
 const HomePage: Component = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage: Component = () => {
       <ActiveScene />
       <LateralMenu />
       <AudioPlayer />
+      <EffectPlayer />
     </>
   );
 };

@@ -2,7 +2,7 @@ import { For, type Component, createMemo } from "solid-js";
 import clsx from 'clsx';
 
 import "../assets/styles/ActiveScene.css";
-import { effectsVolume, setEffectsVolume } from "../stores/effects";
+import effects from "../stores/effects";
 import { type EffectType } from "../assets/data/audio.data";
 import { currentScene, night, pixelated } from "../stores/scene";
 import { hasSupportFor } from "../utils/set";
@@ -21,6 +21,7 @@ const ActiveScene: Component = () => {
     let variant = "default";
     
     const sceneVariants = Object.keys(currentScene().variants);
+    const effectsVolume = effects.volume();
     const enabledEffects = Object.keys(effectsVolume).filter(effect => effectsVolume[effect as EffectType] > 0);
 
     // check in enabled variants
@@ -71,12 +72,12 @@ const ActiveScene: Component = () => {
                 onClick={() => {
                   if (action.type !== "sound") return;
                   // We start the volume at 20% to avoid the sound being too loud by default.
-                  setEffectsVolume(action.effect, prev => prev === 0 ? 0.2 : 0);
+                  effects.setVolume(prev => ({...prev, [action.effect]: prev[action.effect] === 0 ? 0.2 : 0 }));
                 }}
               >
                 <div class={clsx(
                   "group-hover:opacity-100 bg-white transition h-[18px] w-[18px] rounded-[50%]",
-                  action.type === "sound" && effectsVolume[action.effect] > 0 ? "opacity-100" : "opacity-0"
+                  action.type === "sound" && effects.volume()[action.effect] > 0 ? "opacity-100" : "opacity-0"
                 )} />
               </div>
               <p>{action.title}</p>

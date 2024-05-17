@@ -4,8 +4,7 @@ import SkipPreviousIcon from "../assets/icons/SkipPrevious";
 import SkipNextIcon from "../assets/icons/SkipNext";
 import PlayIcon from "../assets/icons/Play";
 import SettingsIcon from "../assets/icons/Settings";
-import { currentSceneID, night, pixelated, setNight, setPixelated } from "../stores/set";
-import { scenes } from "../assets/data/sets.data";
+import { currentScene, night, pixelated, setNight, setPixelated } from "../stores/scene";
 import { hasSupportFor } from "../utils/set";
 import VolumeIcon from "../assets/icons/Volume";
 import VolumeMuteIcon from "../assets/icons/VolumeMute";
@@ -24,7 +23,6 @@ const Divider = () => (
 );
 
 const LateralMenu: Component = () => {
-  const currentScene = () => scenes[currentSceneID()];
   const supportForNight = () => hasSupportFor(currentScene(), "night");
   const supportForPixel = () => hasSupportFor(currentScene(), "pixel");
 

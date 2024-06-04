@@ -8,7 +8,7 @@ const AudioPlayer: Component = () => {
       <p class="text-xl mb-2">AudioPlayer__DEBUG</p>
       
       <p>TIMING: {player.audio.currentTime}/{player.audio.duration} seconds</p>
-      <p>VOLUME: {player.audio.volume * 100}%</p>
+      <p>VOLUME: {!player.audio.muted ? player.audio.volume * 100 + "%" : "MUTED"}</p>
       <p>PLAYLIST_MOOD: {player.mood}</p>
       <p>TRACK_INDEX: {player.currentTrackID}</p>
       

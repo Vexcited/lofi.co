@@ -17,6 +17,7 @@ import FullscreenIcon from "../assets/icons/Fullscreen";
 import player from "../stores/player";
 import PauseIcon from "../assets/icons/Pause";
 import { AudioState } from "@solid-primitives/audio";
+import { setShowSceneSelector } from "../stores/app";
 
 const Divider = () => (
   <div class="bg-[#fff2] rounded-[2px] h-[1px] my-[20px] w-[20px] rotate-90" />
@@ -100,7 +101,7 @@ const LateralMenu: Component = () => {
         />
         <Button
           icon={<ScenesIcon />}
-          onClick={() => void 0}
+          onClick={() => setShowSceneSelector(prev => !prev)}
         />
         <Button
           icon={<ToolsIcon />}

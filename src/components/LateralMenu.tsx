@@ -29,6 +29,7 @@ const LateralMenu: Component = () => {
   const supportForPixel = () => hasSupportFor(currentScene(), "pixel");
 
   const Button: VoidComponent<{
+    active?: boolean
     name: string
     icon: JSX.Element,
     onClick: () => void
@@ -37,6 +38,7 @@ const LateralMenu: Component = () => {
       <Tooltip.Trigger
         type="button"
         class="p-2 hover:(bg-[#fff]/20 scale-110) rounded-lg transition"
+        classList={{ "bg-[#fff]/15": props.active }}
         onClick={() => props.onClick()}
       >
         {props.icon}
@@ -98,6 +100,7 @@ const LateralMenu: Component = () => {
           onClick={() => void 0}
         />
         <Button
+          active={player.audio.muted}
           name="Mute"
           icon={<VolumeMuteIcon />}
           onClick={() => player.controls.setMuted(!player.audio.muted)}

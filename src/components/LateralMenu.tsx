@@ -1,4 +1,5 @@
 import { type Component, Show, type VoidComponent, type JSX } from "solid-js";
+import { Tooltip } from "@kobalte/core/tooltip";
 
 import SkipPreviousIcon from "../assets/icons/SkipPrevious";
 import SkipNextIcon from "../assets/icons/SkipNext";
@@ -9,7 +10,7 @@ import { hasSupportFor } from "../utils/set";
 import VolumeIcon from "../assets/icons/Volume";
 import VolumeMuteIcon from "../assets/icons/VolumeMute";
 import MixerIcon from "../assets/icons/Mixer";
-import TemplatesIcon from "../assets/icons/Templates";
+// import TemplatesIcon from "../assets/icons/Templates";
 import ScenesIcon from "../assets/icons/Scenes";
 import ToolsIcon from "../assets/icons/Tools";
 import PipIcon from "../assets/icons/Pip";
@@ -28,16 +29,24 @@ const LateralMenu: Component = () => {
   const supportForPixel = () => hasSupportFor(currentScene(), "pixel");
 
   const Button: VoidComponent<{
+    name: string
     icon: JSX.Element,
     onClick: () => void
   }> = (props) => (
-    <button
-      type="button"
-      class="p-2 hover:(bg-[#fff]/20 scale-110) rounded-lg transition"
-      onClick={() => props.onClick()}
-    >
-      {props.icon}
-    </button>
+    <Tooltip>
+      <Tooltip.Trigger
+        type="button"
+        class="p-2 hover:(bg-[#fff]/20 scale-110) rounded-lg transition"
+        onClick={() => props.onClick()}
+      >
+        {props.icon}
+      </Tooltip.Trigger>
+      <Tooltip.Portal>
+        <Tooltip.Content class="z-50 bg-bgd-100 rounded-[10px] px-3 py-2 mb-3 border border-white/20 backdrop-blur-[30px]">
+          <p>{props.name}</p>
+        </Tooltip.Content>
+      </Tooltip.Portal>
+    </Tooltip>
   )
 
   return (
@@ -66,53 +75,64 @@ const LateralMenu: Component = () => {
 
       <div class="flex items-center gap-1.5">
         <Button
+          name="Previous track"
           icon={<SkipPreviousIcon />}
           onClick={() => player.previousTrack()}
         />
 
         <Button
+          name={player.audio.state === AudioState.PLAYING ? "Pause" : "Play"}
           icon={player.audio.state === AudioState.PLAYING ? <PauseIcon /> : <PlayIcon />}
           onClick={() => player.audio.state === AudioState.PLAYING ? player.controls.pause() : player.controls.play()}
         />
 
         <Button
+          name="Next track"
           icon={<SkipNextIcon />}
           onClick={() => player.nextTrack()}
         />
 
         <Button
+          name="Volume"
           icon={<VolumeIcon />}
           onClick={() => void 0}
         />
         <Button
+          name="Mute"
           icon={<VolumeMuteIcon />}
-          onClick={() => void 0}
+          onClick={() => player.controls.setMuted(!player.audio.muted)}
         />
         
         <Divider />
 
         <Button
+          name="Mixer"
           icon={<MixerIcon />}
           onClick={() => void 0}
         />
-        <Button
+        {/* <Button
+          name="Templates"
           icon={<TemplatesIcon />}
           onClick={() => void 0}
-        />
+        /> */}
         <Button
+          name="Scenes"
           icon={<ScenesIcon />}
           onClick={() => setShowSceneSelector(prev => !prev)}
         />
         <Button
+          name="Tools"
           icon={<ToolsIcon />}
           onClick={() => void 0}
         />
         <Divider />
         <Button
+          name="Picture-in-picture"
           icon={<PipIcon />}
           onClick={() => void 0}
         />
         <Button
+          name="Fullscreen"
           icon={<FullscreenIcon />}
           onClick={() => void 0}
         />

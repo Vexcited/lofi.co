@@ -1,5 +1,5 @@
 import { type SoundTrackMood, playlistsBase } from "../assets/data/audio.data";
-import { createAudio } from "@solid-primitives/audio"
+import { type AudioState, createAudio } from "@solid-primitives/audio"
 import { createStore, unwrap } from "solid-js/store";
 import { createEffect, createRoot, on, onCleanup } from "solid-js";
 
@@ -59,7 +59,7 @@ const player = createRoot(() => {
   const track = () => playlistsBase[state.playlistMood][state.currentTrackID].url; 
   const [audio, controls] = createAudio(track);
 
-  // Update the volume of the audio player.
+  // Update the mute state of the audio player.
   createEffect(on(() => state.muted, (muted) => audio.player.muted = muted));
 
   const handleNextTrack = () => {
@@ -104,29 +104,39 @@ const player = createRoot(() => {
   
   return {
     audio: {
-      get currentTime () {
+      get currentTime (): number {
         return audio.currentTime
       },
       
-      get duration () {
+      get duration (): number {
         return audio.duration
       },
 
-      get volume () {
-        return audio.volume
+      get volume (): number {
+        return state.volume
       },
 
-      get state () {
+      get state (): AudioState {
         return audio.state
       },
 
-      get muted () {
+      get muted (): boolean {
         return state.muted
       }
     },
 
     controls: {
-      ...controls,
+      seek: controls.seek,
+      play: controls.play,
+      pause: controls.pause,
+      
+      setVolume: (volume: number) => {
+        setState({ volume });
+
+        // Updates the volume of the audio player only.
+        controls.setVolume(volume);
+      },
+
       setMuted: (muted: boolean) => setState({ muted })
     },
     

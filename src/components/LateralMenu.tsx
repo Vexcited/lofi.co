@@ -1,4 +1,4 @@
-import { type Component, Show, type VoidComponent, type JSX } from "solid-js";
+import { type Component, Show, type VoidComponent, type JSX, createSignal } from "solid-js";
 import { Tooltip } from "@kobalte/core/tooltip";
 
 import SkipPreviousIcon from "../assets/icons/SkipPrevious";
@@ -49,7 +49,20 @@ const LateralMenu: Component = () => {
         </Tooltip.Content>
       </Tooltip.Portal>
     </Tooltip>
-  )
+  );
+
+  const [showVolumeSlider, setShowVolumeSlider] = createSignal(false);
+  const VolumeSlider: VoidComponent = () => (
+    <div class="absolute bottom-[60px] left-[50%] transform translate-x-[-50%] bg-bgd-100 rounded-[10px] h-[52px] border border-white/20 backdrop-blur-[30px] flex justify-between items-center px-4">
+      <input
+        type="range"
+        min="0"
+        max="100"
+        value={player.audio.volume * 100}
+        onInput={(e) => player.controls.setVolume(e.currentTarget.valueAsNumber / 100)}
+      />
+    </div>
+  );
 
   return (
     <div class="z-20 fixed bottom-[22px] inset-x-[17px] bg-bgd-100 rounded-[10px] h-[52px] border border-white/20 backdrop-blur-[30px] flex justify-between items-center px-4">
@@ -94,11 +107,17 @@ const LateralMenu: Component = () => {
           onClick={() => player.nextTrack()}
         />
 
-        <Button
-          name="Volume"
-          icon={<VolumeIcon />}
-          onClick={() => void 0}
-        />
+        <div class="relative">
+          <Button
+            name="Volume"
+            icon={<VolumeIcon />}
+            onClick={() => setShowVolumeSlider(prev => !prev)}
+          />
+          <Show when={showVolumeSlider()}>
+            <VolumeSlider />
+          </Show>
+        </div>
+
         <Button
           active={player.audio.muted}
           name="Mute"

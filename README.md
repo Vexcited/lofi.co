@@ -16,4 +16,4 @@ I love the design of `lofi.co` and I want to keep it alive even after it shuts d
 
 Since `lofi.co` will shut down, their assets at `https://lofico.nyc3.cdn.digitaloceanspaces.com` will probably also shut down - not sure about that though.
 
-To prevent losing any of those assets, I've dumped and mirrored them at `https://lofi-co-assets.vexcited.com`.
+To prevent losing any of those assets, I've dumped and mirrored them at `https://lofi-co-assets.vexcited.com`. You can spin up your own assets mirror by serving these dumps from [Google Drive](https://drive.google.com/drive/folders/1ZBbENPYxs5mXB-1SIU-ftNBx9opRhhNl). Each `.zip` file is a folder, you can use the [directory listing of my mirror](https://lofi-co-assets.vexcited.com) as reference.

@@ -1,5 +1,8 @@
 # `lofi.co` but Open Source
 
+> [!IMPORTANT]
+> My instance `https://lofi-co-assets.vexcited.com` got shutdown lately (because of a migration I am doing) so the assets won't be available for some moment, sorry for this inconvenience. See the FAQ if you want to host yourself the assets.
+
 ## FAQ
 
 ### Why ?

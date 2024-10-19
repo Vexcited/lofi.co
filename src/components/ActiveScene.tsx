@@ -80,7 +80,11 @@ const ActiveScene: Component = () => {
                   action.type === "sound" && effects.volume()[action.effect] > 0 ? "opacity-100" : "opacity-0"
                 )} />
               </div>
-              <p>{action.title}</p>
+              <p
+                style={{ "text-shadow": "0 0 8px rgb(0 0 0 / 100%)"}}
+              >
+                {action.title}
+              </p>
             </div>
           )}
         </For>
